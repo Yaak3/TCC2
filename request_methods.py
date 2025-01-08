@@ -9,7 +9,6 @@ def make_request(endpoint):
 
     return response
 
-
 def get_categories_ids(categories):
     categories_ids = []
 
@@ -22,8 +21,8 @@ def get_categories_ids(categories):
 
     return categories_ids
 
-def get_unique_trounaments_ids(categories_ids, trounaments):
-    unique_trounaments_ids = []
+def get_unique_tournaments(categories_ids, trounaments):
+    unique_tournaments_ids = {}
 
     for category_id in categories_ids:
         response = make_request(f'category/{category_id}/unique-tournaments')
@@ -31,7 +30,47 @@ def get_unique_trounaments_ids(categories_ids, trounaments):
 
         for data in response_data['uniqueTournaments']:
             if(data['name'] in trounaments):
-                unique_trounaments_ids.append(data['id'])
+                unique_tournaments_ids[data['name']] = data['id']
 
     
-    return unique_trounaments_ids
+    return unique_tournaments_ids
+
+def get_unique_tournament_seasons(unique_tournaments, season_years):
+    unique_tournament_season_ids = {}
+
+    for tournamnet, tournament_id in unique_tournaments.items():
+        response = make_request(f'unique-tournament/{tournament_id}/seasons')
+
+        response_data = response['seasons']
+
+        season_ids = []
+
+        for index, data in enumerate(response_data):
+            years = season_years[tournamnet]
+
+            if(data['year'] in years):
+                season_ids.append(data['id'])
+            
+            if(index + 1 == len(response_data)):
+                unique_tournament_season_ids[tournamnet] = season_ids
+
+
+    return unique_tournament_season_ids
+
+def get_teams_last_season(unique_tournaments, unique_tournament_season_ids):
+    teams = {}
+
+    for tournament, tournament_id in unique_tournaments.items():
+        tournament_last_season_id = unique_tournament_season_ids[tournament][0]
+        response = make_request(f'unique-tournament/{tournament_id}/season/{tournament_last_season_id}/teams')
+
+        response_data = response['teams']
+
+        for team in response_data:
+            teams[team['name']] = team['id']
+
+    return teams
+
+'''
+TODO: Coletar todos os jogadores de um time, e encontrar uma forma de identificar de qual campeonato cada time pertence
+'''
