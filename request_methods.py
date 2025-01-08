@@ -73,4 +73,18 @@ def get_teams_last_season(unique_tournaments, unique_tournament_season_ids):
 
 '''
 TODO: Coletar todos os jogadores de um time, e encontrar uma forma de identificar de qual campeonato cada time pertence
+
+Depois, utilizar os endpoints abaixo para coletar estatisticas dos jogadores
+
+https://www.sofascore.com/api/v1/player/981619/characteristics - coleta as posições dos jogadores
+
+https://www.sofascore.com/api/v1/player/981619/attribute-overviews - coleta o mapa de overview do jogador
+
+https://www.sofascore.com/api/v1/player/981619/statistics/seasons - da para coletar todas as temporadas que o jogador jogou em todos os torneios
+
+https://www.sofascore.com/api/v1/player/981619/unique-tournament/325/season/58766/statistics/overall - pega as estatisticas gerais do jogador na temporada
+
+https://api.sofascore.com/api/v1/player/7635/unique-tournament/8/season/18020/heatmap - pega o heatmap da temporada do jogador
+
+https://www.sofascore.com/api/v1/player/981619 - pega as características fisicas dos jogadores
 '''
