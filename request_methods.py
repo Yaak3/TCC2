@@ -49,7 +49,7 @@ def get_unique_tournament_seasons(unique_tournaments, season_years):
             years = season_years[tournamnet]
 
             if(data['year'] in years):
-                season_ids.append(data['id'])
+                season_ids.append({'id': data['id'], 'year': data['year']})
             
             if(index + 1 == len(response_data)):
                 unique_tournament_season_ids[tournamnet] = season_ids
@@ -58,18 +58,33 @@ def get_unique_tournament_seasons(unique_tournaments, season_years):
     return unique_tournament_season_ids
 
 def get_teams_last_season(unique_tournaments, unique_tournament_season_ids):
-    teams = {}
+    players = {}
+    offset = 0
+    season_players = []
 
     for tournament, tournament_id in unique_tournaments.items():
-        tournament_last_season_id = unique_tournament_season_ids[tournament][0]
-        response = make_request(f'unique-tournament/{tournament_id}/season/{tournament_last_season_id}/teams')
+        for trounament_seasons in unique_tournament_season_ids[tournament]:
+            while(True):
+                response = make_request(f'unique-tournament/{tournament_id}/season/{trounament_seasons["id"]}/statistics?limit=100&offset={offset}')
 
-        response_data = response['teams']
+                response_data = response['results']
 
-        for team in response_data:
-            teams[team['name']] = team['id']
+                if(len(response_data) == 0):
+                    break
+                
+                print(response_data)
+                for data in response_data:
+                    season_players.append(data['player']['id'])
 
-    return teams
+                break
+
+
+            players[tournament][trounament_seasons['id']] = season_players
+
+            offset = 0
+            season_players = []
+                
+    return players
 
 '''
 TODO: Coletar todos os jogadores de um time, e encontrar uma forma de identificar de qual campeonato cada time pertence
