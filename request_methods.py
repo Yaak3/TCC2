@@ -1,8 +1,10 @@
 import requests
 from constants import __BASE_URL
+from time import sleep
 
 def make_request(endpoint):
     response = requests.get(__BASE_URL + endpoint)
+    sleep(1)
     response.raise_for_status()
 
     response = response.json()
@@ -57,12 +59,14 @@ def get_unique_tournament_seasons(unique_tournaments, season_years):
 
     return unique_tournament_season_ids
 
-def get_teams_last_season(unique_tournaments, unique_tournament_season_ids):
+def get_season_players(unique_tournaments, unique_tournament_season_ids):
     players = {}
     offset = 0
     season_players = []
 
     for tournament, tournament_id in unique_tournaments.items():
+        players[tournament] = {}
+
         for trounament_seasons in unique_tournament_season_ids[tournament]:
             while(True):
                 response = make_request(f'unique-tournament/{tournament_id}/season/{trounament_seasons["id"]}/statistics?limit=100&offset={offset}')
@@ -72,19 +76,19 @@ def get_teams_last_season(unique_tournaments, unique_tournament_season_ids):
                 if(len(response_data) == 0):
                     break
                 
-                print(response_data)
                 for data in response_data:
                     season_players.append(data['player']['id'])
 
-                break
+                offset += 100
 
-
-            players[tournament][trounament_seasons['id']] = season_players
+                players[tournament].update({trounament_seasons['id']: season_players})
 
             offset = 0
             season_players = []
                 
     return players
+
+
 
 '''
 TODO: Coletar todos os jogadores de um time, e encontrar uma forma de identificar de qual campeonato cada time pertence
