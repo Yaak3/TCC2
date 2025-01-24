@@ -1,6 +1,7 @@
 import requests
 from constants import __BASE_URL
 from time import sleep
+from json import dump
 
 def make_request(endpoint):
     response = requests.get(__BASE_URL + endpoint)
@@ -10,6 +11,10 @@ def make_request(endpoint):
     response = response.json()
 
     return response
+
+def save_to_json(data, filename):
+    with open(filename, "w", encoding="utf-8") as json_file:
+        dump(data, json_file, indent=4)
 
 def get_categories_ids(categories):
     categories_ids = []
@@ -81,10 +86,12 @@ def get_season_players(unique_tournaments, unique_tournament_season_ids):
 
                 offset += 100
 
-                players[tournament].update({trounament_seasons['id']: season_players})
+                players[tournament].update({trounament_seasons['year']: season_players})
 
             offset = 0
             season_players = []
+
+    save_to_json(data=players, filename='data/players_id.json')
                 
     return players
 
