@@ -24,7 +24,7 @@ def collect_and_save_to_json(unique_tournaments, unique_tournament_season_ids):
                 player_data.update(player_season_heatmap)
                 player_data.update(player_season_statistics)
 
-                player_file_name = f'{__DATA_BASE_DIR}{directory_created}{player}'
+                player_file_name = f'{__DATA_BASE_DIR}{directory_created}/{player}'
 
                 save_to_json(player_data, player_file_name)
                 break
