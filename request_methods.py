@@ -1,20 +1,22 @@
 import requests
 from constants import __BASE_URL
 from time import sleep
-from json import dump
 
 def make_request(endpoint):
-    response = requests.get(__BASE_URL + endpoint)
-    sleep(1)
-    response.raise_for_status()
+    try:
+        response = requests.get(__BASE_URL + endpoint)
+        sleep(1)
+        response.raise_for_status()
 
-    response = response.json()
+        response = response.json()
 
-    return response
-
-def save_to_json(data, filename):
-    with open(filename, "w", encoding="utf-8") as json_file:
-        dump(data, json_file, indent=4)
+        return response
+    except requests.exceptions.HTTPError as err:
+        print(f"Erro HTTP: {err}")
+    except requests.exceptions.RequestException as err:
+        print(f"Erro de conexão: {err}")
+    except ValueError:
+        print("Erro ao processar a resposta JSON.")
 
 def get_categories_ids(categories):
     categories_ids = []
@@ -64,38 +66,57 @@ def get_unique_tournament_seasons(unique_tournaments, season_years):
 
     return unique_tournament_season_ids
 
-def get_season_players(unique_tournaments, unique_tournament_season_ids):
+def get_season_players(tournament_id, season_id):
     players = {}
     offset = 0
     season_players = []
 
-    for tournament, tournament_id in unique_tournaments.items():
-        players[tournament] = {}
+    while(True):
+        response = make_request(f'unique-tournament/{tournament_id}/season/{season_id}/statistics?limit=100&offset={offset}')
 
-        for trounament_seasons in unique_tournament_season_ids[tournament]:
-            while(True):
-                response = make_request(f'unique-tournament/{tournament_id}/season/{trounament_seasons["id"]}/statistics?limit=100&offset={offset}')
+        response_data = response['results']
 
-                response_data = response['results']
-
-                if(len(response_data) == 0):
-                    break
+        if(len(response_data) == 0):
+            break
                 
-                for data in response_data:
-                    season_players.append(data['player']['id'])
+        for data in response_data:
+            season_players.append(data['player']['id'])
 
-                offset += 100
+        offset += 100
 
-                players[tournament].update({trounament_seasons['year']: season_players})
+    return season_players
 
-            offset = 0
-            season_players = []
+def get_player_positions(player_id):
+    response = make_request(f'player/{player_id}/characteristics')
 
-    save_to_json(data=players, filename='data/players_id.json')
-                
-    return players
+    return response['positions']
 
+def get_player_season_statistics(player_id, tournament_id, season_id):
+    player_statistics = {}
+    
+    response = make_request(f'player/{player_id}/unique-tournament/{tournament_id}/season/{season_id}/statistics/overall')
+    
+    player_statistics['statistics'] = response['statistics']
+    player_statistics['team'] = response['team']
+    
+    return player_statistics
 
+def get_player_season_heatmap(player_id, tournament_id, season_id):
+    heatmap = {}
+    
+    response = make_request(f'player/{player_id}/unique-tournament/{tournament_id}/season/{season_id}/heatmap')
+
+    heatmap['points'] = response['points']
+    heatmap['matches'] = response['matches']
+
+    return heatmap
+
+def get_player_characteristics(player_id):
+    player_characteristics = {}
+
+    response = make_request(f'player/{player_id}')
+
+    return response
 
 '''
 TODO: Coletar todos os jogadores de um time, e encontrar uma forma de identificar de qual campeonato cada time pertence
