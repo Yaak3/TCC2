@@ -16,9 +16,10 @@ def convert_directory_name(tournament):
     
     return directory_name
 
-def create_directory(tournament):
+def create_directory(tournament, year):
 
     directory_to_create = convert_directory_name(tournament)
+    directory_to_create = f'{directory_to_create}/{year}'
 
     makedirs(f'{__DATA_BASE_DIR}{directory_to_create}', exist_ok=True)
 
@@ -26,4 +27,4 @@ def create_directory(tournament):
 
 def save_to_json(data, filename):
     with open(filename, "w", encoding="utf-8") as json_file:
-        dump(data, json_file, indent=4)
+        dump(data, json_file, ensure_ascii=False, indent=4)

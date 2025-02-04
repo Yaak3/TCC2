@@ -89,7 +89,7 @@ def get_season_players(tournament_id, season_id):
 def get_player_positions(player_id):
     response = make_request(f'player/{player_id}/characteristics')
 
-    return response['positions']
+    return response
 
 def get_player_season_statistics(player_id, tournament_id, season_id):
     player_statistics = {}
@@ -112,8 +112,6 @@ def get_player_season_heatmap(player_id, tournament_id, season_id):
     return heatmap
 
 def get_player_characteristics(player_id):
-    player_characteristics = {}
-
     response = make_request(f'player/{player_id}')
 
     return response

@@ -5,9 +5,9 @@ from utils import create_directory, save_to_json
 def collect_and_save_to_json(unique_tournaments, unique_tournament_season_ids):
 
     for tournament, tournament_id in unique_tournaments.items():
-        directory_created = create_directory(tournament)
 
         for season in unique_tournament_season_ids[tournament]:
+            directory_created = create_directory(tournament, season['year'])
 
             season_players = get_season_players(season_id=season['id'], tournament_id=tournament_id)
 
@@ -24,7 +24,7 @@ def collect_and_save_to_json(unique_tournaments, unique_tournament_season_ids):
                 player_data.update(player_season_heatmap)
                 player_data.update(player_season_statistics)
 
-                player_file_name = f'{__DATA_BASE_DIR}{directory_created}/{player}'
+                player_file_name = f'{__DATA_BASE_DIR}{directory_created}/{player}.json'
 
                 save_to_json(player_data, player_file_name)
                 break
@@ -37,6 +37,8 @@ def collect_and_save_to_json(unique_tournaments, unique_tournament_season_ids):
 categories_ids = get_categories_ids(__CATEGORIES)
 unique_trounaments = get_unique_tournaments(categories_ids, __TROUNAMENTS)
 unique_tournament_season_ids = get_unique_tournament_seasons(unique_trounaments, __SEASON_YEARS)
-collect_and_save_to_json(unique_trounaments, unique_tournament_season_ids)
+print(unique_trounaments)
+print(unique_tournament_season_ids)
+#collect_and_save_to_json(unique_trounaments, unique_tournament_season_ids)
 
 print("Coleta dos dados finalizada!")
