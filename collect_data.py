@@ -25,13 +25,8 @@ def collect_and_save_to_json(unique_tournaments, unique_tournament_season_ids):
                 player_data.update(player_season_statistics)
 
                 player_file_name = f'{__DATA_BASE_DIR}{directory_created}/{player}.json'
-
+                print(f'player {player} data collected, tournament: {tournament}, season: {season['year']}')
                 save_to_json(player_data, player_file_name)
-                break
-
-            break
-    
-        break
 
 
 categories_ids = get_categories_ids(__CATEGORIES)
@@ -39,6 +34,6 @@ unique_trounaments = get_unique_tournaments(categories_ids, __TROUNAMENTS)
 unique_tournament_season_ids = get_unique_tournament_seasons(unique_trounaments, __SEASON_YEARS)
 print(unique_trounaments)
 print(unique_tournament_season_ids)
-#collect_and_save_to_json(unique_trounaments, unique_tournament_season_ids)
+collect_and_save_to_json(unique_trounaments, unique_tournament_season_ids)
 
 print("Coleta dos dados finalizada!")

@@ -5,7 +5,7 @@ from time import sleep
 def make_request(endpoint):
     try:
         response = requests.get(__BASE_URL + endpoint)
-        sleep(1)
+        sleep(0.5)
         response.raise_for_status()
 
         response = response.json()

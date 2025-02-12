@@ -16,10 +16,14 @@ def convert_directory_name(tournament):
     
     return directory_name
 
+def normalize_year(year):
+    return re.sub(r'\/', '_', year)
+
 def create_directory(tournament, year):
 
     directory_to_create = convert_directory_name(tournament)
-    directory_to_create = f'{directory_to_create}/{year}'
+    normalized_year = normalize_year(year)
+    directory_to_create = f'{directory_to_create}/{normalized_year}'
 
     makedirs(f'{__DATA_BASE_DIR}{directory_to_create}', exist_ok=True)
 
