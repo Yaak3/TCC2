@@ -13,6 +13,7 @@ def collect_and_save_to_json(unique_tournaments, unique_tournament_season_ids):
 
             for player in season_players:
                 player_data = {}
+                print(f'collecting data from player: {player}, tournament: {tournament}, season: {season['year']}')
 
                 player_positions = get_player_positions(player_id=player)
                 player_characteristics = get_player_characteristics(player_id=player)

@@ -13,8 +13,10 @@ def make_request(endpoint):
         return response
     except requests.exceptions.HTTPError as err:
         print(f"Erro HTTP: {err}")
+        return None
     except requests.exceptions.RequestException as err:
         print(f"Erro de conexão: {err}")
+        return None
     except ValueError:
         print("Erro ao processar a resposta JSON.")
 
@@ -67,7 +69,6 @@ def get_unique_tournament_seasons(unique_tournaments, season_years):
     return unique_tournament_season_ids
 
 def get_season_players(tournament_id, season_id):
-    players = {}
     offset = 0
     season_players = []
 
@@ -89,15 +90,20 @@ def get_season_players(tournament_id, season_id):
 def get_player_positions(player_id):
     response = make_request(f'player/{player_id}/characteristics')
 
-    return response
+    if(response):
+        return response
+    
+    return {}
 
 def get_player_season_statistics(player_id, tournament_id, season_id):
     player_statistics = {}
     
     response = make_request(f'player/{player_id}/unique-tournament/{tournament_id}/season/{season_id}/statistics/overall')
-    
-    player_statistics['statistics'] = response['statistics']
-    player_statistics['team'] = response['team']
+
+    if(response):
+        
+        player_statistics['statistics'] = response['statistics']
+        player_statistics['team'] = response['team']
     
     return player_statistics
 
@@ -106,8 +112,9 @@ def get_player_season_heatmap(player_id, tournament_id, season_id):
     
     response = make_request(f'player/{player_id}/unique-tournament/{tournament_id}/season/{season_id}/heatmap')
 
-    heatmap['points'] = response['points']
-    heatmap['matches'] = response['matches']
+    if(response):
+        heatmap['points'] = response['points']
+        heatmap['matches'] = response['matches']
 
     return heatmap
 

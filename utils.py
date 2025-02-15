@@ -1,7 +1,7 @@
 import re
 import unicodedata
-from os import makedirs
-from json import dump
+from os import makedirs, path
+from json import dump, loads
 from constants import __DATA_BASE_DIR
 
 def convert_directory_name(tournament):
@@ -32,3 +32,22 @@ def create_directory(tournament, year):
 def save_to_json(data, filename):
     with open(filename, "w", encoding="utf-8") as json_file:
         dump(data, json_file, ensure_ascii=False, indent=4)
+
+def update_pointer(tournament, season, player, pointer):
+    new_pointer = {tournament: {season: player}}
+    pointer.update(new_pointer)
+
+    with open('./data/pointer', "w", encoding="utf-8") as json_file:
+        dump(pointer, json_file, ensure_ascii=False, indent=4)
+
+    return pointer
+
+def generate_pointer():
+    file = './data/pointer'
+    pointer = {}
+    
+    if(path.exists(file)):
+        with open(file, 'r') as file:
+            pointer = loads(file.read())
+
+    return pointer
