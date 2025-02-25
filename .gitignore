@@ -1,2 +1,4 @@
 __pycache__/
 data/
+Notebooks/general_tests.ipynb
+csv_datasets/
