@@ -2,6 +2,7 @@ import re
 import unicodedata
 from os import makedirs, path
 from json import dump, loads
+import matplotlib.pyplot as plt
 from constants import __DATA_BASE_DIR
 
 def convert_directory_name(tournament):
@@ -51,3 +52,13 @@ def generate_pointer():
             pointer = loads(file.read())
 
     return pointer
+
+def generic_bar_graph(categories, values, x_label, y_label, title, x_rotation=0, x_size=8, y_size=6):
+
+    plt.bar(categories, values, color='blue')
+    plt.title(title)
+    plt.xlabel(x_label)
+    plt.xticks(rotation=x_rotation)
+    plt.ylabel(y_label)
+
+    return plt.show()
