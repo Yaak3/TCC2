@@ -3,6 +3,7 @@ import unicodedata
 from os import makedirs, path
 from json import dump, loads
 import matplotlib.pyplot as plt
+import seaborn as sns
 from constants import __DATA_BASE_DIR
 
 def convert_directory_name(tournament):
@@ -62,3 +63,46 @@ def generic_bar_graph(categories, values, x_label, y_label, title, x_rotation=0,
     plt.ylabel(y_label)
 
     return plt.show()
+
+def generic_distribution_plot(data, variables, graphs_per_row=3, bins_dict=None):
+    num_vars = len(variables)
+    num_rows = -(-num_vars // graphs_per_row)
+    
+
+    fig, axes = plt.subplots(num_rows, graphs_per_row, figsize=(graphs_per_row * 5, num_rows * 4))
+    axes = axes.flatten()
+    
+    
+    for i, var in enumerate(variables):
+        bins = bins_dict.get(var, 10) if bins_dict else 10  
+        sns.histplot(data=data, x=var, kde=True, bins=bins, ax=axes[i])
+        axes[i].set_title(f'Distribuição de {var} ({bins} bins)')
+    
+    
+    for j in range(len(variables), len(axes)):
+        fig.delaxes(axes[j])
+    
+    
+    plt.tight_layout()
+    plt.show()
+
+def generic_plot_boxplots(data, variables, graphs_per_row=3):
+    num_vars = len(variables)
+    num_rows = -(-num_vars // graphs_per_row)
+    
+    fig, axes = plt.subplots(num_rows, graphs_per_row, figsize=(graphs_per_row * 5, num_rows * 4))
+    axes = axes.flatten()
+    
+    
+    for i, var in enumerate(variables):
+        sns.boxplot(data=data, y=var, ax=axes[i], color='skyblue')
+        axes[i].set_title(f'Boxplot de {var}')
+        axes[i].set_xlabel('')
+    
+    
+    for j in range(len(variables), len(axes)):
+        fig.delaxes(axes[j])
+    
+    
+    plt.tight_layout()
+    plt.show()

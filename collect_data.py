@@ -35,6 +35,6 @@ unique_trounaments = get_unique_tournaments(categories_ids, __TROUNAMENTS)
 unique_tournament_season_ids = get_unique_tournament_seasons(unique_trounaments, __SEASON_YEARS)
 print(unique_trounaments)
 print(unique_tournament_season_ids)
-#collect_and_save_to_json(unique_trounaments, unique_tournament_season_ids)
+collect_and_save_to_json(unique_trounaments, unique_tournament_season_ids)
 
 print("Coleta dos dados finalizada!")
