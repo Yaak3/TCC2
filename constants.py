@@ -25,3 +25,21 @@ __SEASON_YEARS = {
     'Serie B': ['23/24','22/23'],
     'Swiss Super League': ['23/24','22/23']
 }
+__QUADRANTS = {
+    "first": {"top_left": (0, 0), "bottom_right": (25, 25)},
+    "second": {"top_left": (26, 0), "bottom_right": (50, 25)},
+    "third": {"top_left": (51, 0), "bottom_right": (75, 25)},
+    "fourth": {"top_left": (76, 0), "bottom_right": (100, 25)},
+    "fifth": {"top_left": (0, 26), "bottom_right": (25, 50)},
+    "sixth": {"top_left": (26, 26), "bottom_right": (50, 50)},
+    "seventh": {"top_left": (51, 26), "bottom_right": (75, 50)},
+    "eighth": {"top_left": (76, 26), "bottom_right": (100, 50)},
+    "ninth": {"top_left": (0, 51), "bottom_right": (25, 75)},
+    "tenth": {"top_left": (26, 51), "bottom_right": (50, 75)},
+    "eleventh": {"top_left": (51, 51), "bottom_right": (75, 75)},
+    "twelfth": {"top_left": (76, 51), "bottom_right": (100, 75)},
+    "thirteenth": {"top_left": (0, 76), "bottom_right": (25, 100)},
+    "fourteenth": {"top_left": (26, 76), "bottom_right": (50, 100)},
+    "fifteenth": {"top_left": (51, 76), "bottom_right": (75, 100)},
+    "sixteenth": {"top_left": (76, 76), "bottom_right": (100, 100)}
+}
