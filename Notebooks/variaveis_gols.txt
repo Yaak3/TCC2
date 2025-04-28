@@ -1,0 +1,53 @@
+    # Gols absolutos
+    'goals'
+    'totalShots'
+
+    # Olhando para a perna ruim do cara, da pra montar um indicador se ele é bom ou não
+    'leftFootGoals',
+    'rightFootGoals',
+
+    # Com os gols de penalti, da pra montar uma métrica de acurácia de penalti
+    'attemptPenaltyMiss',
+    'attemptPenaltyPost',
+    'attemptPenaltyTarget',
+    'penaltyGoals',
+    'penaltiesTaken',
+
+    'scoringFrequency', # pode ser util
+    
+    # Da pra criar uma métrica de acurácia de chute
+    'totalShots',
+    'shotsOnTarget', 
+    'shotsOffTarget',
+    'hitWoodwork',
+
+    # Criar uma métrica de acurácia de gols dentro da área
+    'goalsFromInsideTheBox',
+    'shotsFromInsideTheBox',
+
+    # Criar uma métrica de acurácia de gols fora da área
+    'goalsFromOutsideTheBox',
+    'shotsFromOutsideTheBox',
+    
+    #Métrica de acurácia de chutes de falta
+    'shotFromSetPiece',
+    'freeKickGoal',
+
+
+    'bigChancesMissed', # da pra usar sozinha 
+    'bigChancesCreated', # da pra usar sozinha
+    'headedGoals', # Vou ter que usar sozinho por que não tem especifico de tentativas de cabeçada
+
+Quais variáveis vou criar daqui?
+
+%deconversãodegols
+%taxadeconversaopernaruim - ver se vale apena por que tem gente que é both no dataset
+%acuraciapenalti
+scoringFrequency
+%acuraciadechute
+%conversaodentrodaarea
+%conversaoforadaarea
+%conversaofaltas
+bigChancesMissed - estou em duvida se uso
+bigChancesCreated
+headedGoals

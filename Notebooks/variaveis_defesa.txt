@@ -1,0 +1,37 @@
+
+    Coisas positivas
+    
+    'tacklesWon',
+    'interceptions',
+    'groundDuelsWon',
+    'aerialDuelsWon',
+    'totalDuelsWon',
+    'clearances',
+    'possessionWonAttThird',
+    'blockedShots', 
+    'ballRecovery',
+    
+    Coisas negativas
+    'aerialLost',
+    'duelLost',
+    'errorLeadToGoal',
+    'errorLeadToShot',
+    'possessionLost',
+    'ownGoals',
+    'dribbledPast',
+    'goalsConceded',
+    'dispossessed',
+    'penaltyConceded',
+    'fouls',
+    'yellowCards',
+    'directRedCards',
+    'redCards',
+    'yellowRedCards',
+    
+
+    Valores totais
+    'tackles',
+    'totalContest',
+
+Variaveis para criar
+ver se juntando as coisas positivas menos as negativas menos os cartões e faltas da para criar um indice unico de defesa

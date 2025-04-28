@@ -1,0 +1,19 @@
+    
+   
+
+
+    variáveis parecidas, relacionadas a frequencia que o cara joga
+    'appearances', 
+    'matches',
+    'minutesPlayed',
+    'matchesStarted',
+
+    'totwAppearances', - Pode ser util, quantas vezes o cara apareceu no time da semana
+
+    Não vou usar
+    'totalRating',
+    'rating',
+    'countRating',
+    'touches',
+    'wasFouled',
+    'penaltyWon',

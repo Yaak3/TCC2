@@ -1,0 +1,49 @@
+    %acertodeassistencia
+    'assists',
+    'totalAttemptAssist',
+
+    %acertopassedefesa
+    'accurateOwnHalfPasses',
+    'totalOwnHalfPasses',
+
+    %acertopasseataque
+    'accurateOppositionHalfPasses', 
+    'totalOppositionHalfPasses',
+    'accurateFinalThirdPasses',
+
+    'keyPasses',
+
+    %acertolancamentos
+    'accurateLongBalls',
+    'totalLongBalls',
+
+    'passToAssist',
+    
+    %acertochippedpass
+    'totalChippedPasses',
+    'accurateChippedPasses',
+    
+    %acertodepasses
+    'accuratePasses',
+    'inaccuratePasses', 
+    'totalPasses',
+
+    %acertodecruzamento
+    'accurateCrosses',
+    'totalCross',
+
+variaveis para criar
+
+%acertodepasses
+%acertodeassistencia
+%acertodecruzamento
+%acertopassedefesa
+%acertopasseataque
+%acertolancamentos
+%acertochippedpass
+'expectedAssists',
+'keyPasses',
+'passToAssist',
+
+Não vou usar
+'goalsAssistsSum',

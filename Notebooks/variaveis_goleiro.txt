@@ -1,0 +1,34 @@
+
+    coisas positivas
+    
+    'saves',
+    'cleanSheet',
+    'savedShotsFromInsideTheBox',
+    'savedShotsFromOutsideTheBox', 
+    'successfulRunsOut',
+    'goalsPrevented',
+    'savesCaught',
+    'savesParried',
+    'highClaims', 
+    'punches',
+
+    coisas negativas
+    
+    'goalsConceded',
+    'goalsConcededInsideTheBox', 
+    'goalsConcededOutsideTheBox', 
+    'unsucsessfullRunsOut' - precisa criar essa variável a partir de runsOut - successfulRunsOut
+    'crossesNotClaimed',
+    
+    %depenaltissalvados
+    'penaltyFaced', 
+    'penaltySave',
+
+    
+
+variaveis para criar
+%depenaltissalvados
+criar um indice só somando as coisas boas e descontando as coisas ruins
+
+não vou usar
+    'runsOut', - da pra criar outras variáveis a partir desta
