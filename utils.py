@@ -106,3 +106,16 @@ def generic_plot_boxplots(data, variables, graphs_per_row=3):
     
     plt.tight_layout()
     plt.show()
+
+def plot_PCA_feature_importance(pca_object, variables):
+    loadings = pca_object.components_.T  # shape: n_features x n_components
+    explained_var = pca_object.explained_variance_ratio_
+
+    for i in range(loadings.shape[1]):
+        plt.figure(figsize=(6, 4))
+        plt.bar(variables, loadings[:, i])
+        plt.title(f'Feature contributions to PC{i+1} ({explained_var[i]*100:.1f}% variance)')
+        plt.xticks(rotation=90)
+        plt.ylabel('Loading')
+        plt.xlabel('Feature')
+        plt.show()
